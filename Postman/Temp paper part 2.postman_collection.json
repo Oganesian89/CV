@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "23c47c18-8c5a-4afc-aa91-818e5dcc76f5",
+		"name": "Temp paper part 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21995053"
+	},
+	"item": [
+		{
+			"name": "Зайти во вкладку \"Расписание\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\": \"2022-08-22T00:00:00+03:00\",\r\n    \"till\": \"2022-08-29T00:00:00+03:00\",\r\n    \"onlyTypes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}events",
+					"host": [
+						"{{baseUrl}}events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавить личное событие с валидным названием личного события",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var key = \"IdPersonal\"\r",
+							"var value = pm.response.json(). data. payload. id\r",
+							"pm.collectionVariables.set(key, value);\r",
+							"\r",
+							"\r",
+							"var key = \"startAt\"\r",
+							"var value = pm.response.json().data. startAt\r",
+							"pm.collectionVariables.set(key, value);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n    \"description\": \"hello\",\r\n    \"title\": \"Tata1\",\r\n    \"startAt\": \"2022-08-24T15:00:00+03:00\",\r\n    \"endAt\": \"2022-08-24T15:30:00+03:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}createPersonal",
+					"host": [
+						"{{baseUrl}}createPersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавить личное событие с не валидным названием личного события, более 40 символов",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n    \"description\": \"орпавы\",\r\n    \"title\": \"Разнообразный и богатый опыт говорит нам\",\r\n    \"startAt\": \"2022-08-20T12:00:00+03:00\",\r\n    \"endAt\": \"2022-08-20T12:30:00+03:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}createPersonal",
+					"host": [
+						"{{baseUrl}}createPersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Редактирование личного события",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var key = \"IdPersonal\"\r",
+							"var value = pm.response.json().data.payload.id\r",
+							"pm.collectionVariables.set(key, value)\r",
+							"\r",
+							"\r",
+							"\r",
+							"var key = \"startAt\"\r",
+							"var value = pm.response.json().data. startAt\r",
+							"pm.collectionVariables.set(key, value)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n    \"description\": \"привет\",\r\n    \"title\": \"Тата\",\r\n    \"startAt\": \"2022-08-22T12:00:00+03:00\",\r\n    \"endAt\": \"2022-08-22T12:30:00+03:00\",\r\n    \"id\": {{IdPersonal}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}updatePersonal",
+					"host": [
+						"{{baseUrl}}updatePersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание личного события с не валидным значением 00:00 в поле \"Время\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var key = \"IdPersonal0\"\r",
+							"var value = pm.response.json(). data. payload. id\r",
+							"pm.collectionVariables.set(key, value);\r",
+							"\r",
+							"\r",
+							"var key = \"startAt0\"\r",
+							"var value = pm.response.json().data. startAt\r",
+							"pm.collectionVariables.set(key, value);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjE0OTQ3NDUxLCJpZGVudGl0eSI6InQubWFyZ2FyeWFuNTBAZ21haWwuY29tIiwiaWRlbnRpdHlMb2dpbiI6bnVsbCwiaWRlbnRpdHlFbWFpbCI6InQubWFyZ2FyeWFuNTBAZ21haWwuY29tIiwiaWRlbnRpdHlQaG9uZSI6bnVsbCwibmFtZSI6Ilx1MDQyMlx1MDQzMFx1MDQ0Mlx1MDQzNVx1MDQzMlx1MDQzOFx1MDQzYSIsInN1cm5hbWUiOiJcdTA0MWVcdTA0MzNcdTA0MzBcdTA0M2RcdTA0MzVcdTA0NDFcdTA0NGZcdTA0M2QiLCJlbWFpbCI6InQubWFyZ2FyeWFuNTBAZ21haWwuY29tIiwidWlMYW5ndWFnZSI6InJ1IiwibG9jYWxlIjoicnUiLCJzZXJ2aWNlTG9jYWxlIjpudWxsLCJ1YXMiOjMwLCJqd3RUeXBlIjoxLCJqdGkiOiJHYmhWejhuTUJ0NTdDdGhDcGNqN0NIWHR3ZlFMTW42ayIsImJyYW5kIjpudWxsLCJleHAiOjE2NjA5OTgxMTIsImFUeXBlIjoiVVNFUk5BTUVfUEFTU1dPUkQiLCJhVGltZSI6MTY2MDc2NzE2NSwicm9sZXMiOlsiUk9MRV9URUFDSEVSIiwiUk9MRV9DUk0yX1RFQUNIRVJfQUNDRVNTIiwiUk9MRV9UVENfVVNBR0UiLCJST0xFX1ZJTUJPWF9URUFDSEVSX1VTQUdFIiwiUk9MRV9NQVRIX1RFQUNIRVIiLCJST0xFX01BVEhfQ09OVEVOVF9USEVNRV9WSUVXIl19.GXwbwqOBLcR0kuEy2DkTAco-QNGOg0PPlbr7I8rg8Cri8o3Ntcv47A2qRx2A1fIy2UEzBH8k5FRiiOj_Icc9X0va9KgPeBmA8B6Jpuij2xfExCS0MuimoNWQBL2ELufE6ssNTuS-MDswbp286KRBrBBvUqZ8pWgQZHObnaFatRb4D6q2mr00S4yHRixS7bJNj8b0Mauu_mwdJiXcBX2XVVPjnYL90XLl15ARWfTGhVgDMYYENLNlBB1suIiEqJNWzc_9VWsiCu2spOyO3_dFyhzx_-5q7eXCcHrsN3t9M8J7e448XXlxvUnNARTf26e71PEw_S20WNFa8-0gpUH9sWV_PNR3dQehM7wHHBUrOI9buSXqRID9C1OLZ-zha2SyOZT-wKfTrWumJcM8dIIhq4ZON5tMxHHlE7ODKaFtO91MkTYzWAAW5q6Bihhkyts7dklsBfOAZoPrq0ttzF8ZootADqIvZ4UWKJ0lT_AxVHMK2bICXCYrGZJqB_eYct8EATRhDxkSCsIOYYFL91ikrzzkYyeTXt9lkftGvQQgwKckSkio4GbGgwuIrUYtLvtB2EVBfOgEb1X4SZ30eO2FWTeGhIX2U3FCQ-T7Z1-1dC4Us7UMSrlqIjNn07CiynM5ApCeDs7y1jS_AWUdZ1OXKgTSnH3P0XK4xTq-gZn1iEg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"uytrea\",\r\n    \"title\": \"tata\",\r\n    \"startAt\": \"2022-08-20T00:00:00+03:00\",\r\n    \"endAt\": \"2022-08-21T00:00:00+03:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}createPersonal",
+					"host": [
+						"{{baseUrl}}createPersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание личного события с неустановленной  датой",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"uytrea\",\r\n    \"title\": \"tata\",\r\n    \"startAt\": \"\",\r\n    \"endAt\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}createPersonal",
+					"host": [
+						"{{baseUrl}}createPersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Редактирование цвета в личном событии",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var key = \"IdPersonal\"\r",
+							"var value = pm.response.json(). data. payload. id\r",
+							"pm.collectionVariables.set(key, value);\r",
+							"\r",
+							"\r",
+							"var key = \"startAt\"\r",
+							"var value = pm.response.json().data. startAt\r",
+							"pm.collectionVariables.set(key, value);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"УРААААА\",\r\n    \"title\": \"СКОРЕЕ БЫ СДАТЬ КУРСАЧ\",\r\n    \"startAt\": \"2022-08-22T22:00:00+03:00\",\r\n    \"endAt\": \"2022-08-22T22:30:00+03:00\",\r\n    \"id\": {{IdPersonal}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}updatePersonal",
+					"host": [
+						"{{baseUrl}}updatePersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание личного события в следующем году",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n    \"description\": \"hello\",\r\n    \"title\": \"Tata1\",\r\n    \"startAt\": \"2023-08-24T15:00:00+03:00\",\r\n    \"endAt\": \"2023-08-24T15:30:00+03:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}createPersonal",
+					"host": [
+						"{{baseUrl}}createPersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удаление отредактированного события",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":{{IdPersonal}},\r\n    \"startAt\": \"{{startAt}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}removePersonal",
+					"host": [
+						"{{baseUrl}}removePersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удаление личного события с 0 значением",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token_global={{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":{{IdPersonal0}},\r\n    \"startAt\": \"{{startAt0}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}removePersonal",
+					"host": [
+						"{{baseUrl}}removePersonal"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://api-teachers.skyeng.ru/v2/schedule/",
+			"type": "string"
+		},
+		{
+			"key": "IdPersonal",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "startAt",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "nonValid2",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "noDate",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "idColour",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "idNextyear",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "IdPersonal0",
+			"value": ""
+		},
+		{
+			"key": "startAt0",
+			"value": ""
+		}
+	]
+}

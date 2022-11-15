@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "2a29365c-ed5e-46d1-a930-e1b7e9f3ffe5",
+		"name": "Todolist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21995053"
+	},
+	"item": [
+		{
+			"name": "Открыть список задач",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавить задачу",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"АПИ\",\"completed\":false}"
+				},
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " Открыть обновленный список задач. ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Отметить эту задачу выполненной",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"completed\":true}"
+				},
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/34174",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"34174"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Открыть обновленный список",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удалить задачу",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/34174",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"34174"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Открыть обновленный список задач",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://todo-app-sky.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"todo-app-sky",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
